@@ -91,7 +91,7 @@ if (isset($_SESSION['id_user'])) {
             <hr>
             <div class="form-group">
               <label class="col-sm-2 control-label">Nombre de Usuario</label>
-              <label style="text-align:left" class="col-sm-8 control-label">: <?php echo $data['username']; ?></label>
+              <label style="text-align:left" class="col-sm-8 control-label">: <?php echo $data['nombre']; ?></label>
             </div>
 
             <div class="form-group">

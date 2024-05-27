@@ -5,7 +5,7 @@ session_start();
 require_once "../../config/database.php";
 
 
-if (empty($_SESSION['username']) && empty($_SESSION['password'])){
+if (empty($_SESSION['nombre']) && empty($_SESSION['password'])){
     echo "<meta http-equiv='refresh' content='0; url=index.php?alert=1'>";
 }
 

@@ -33,7 +33,7 @@ if (isset($_POST['id_user'])) {
               <div class="form-group">
                 <label class="col-sm-2 control-label">Nombre de usuario</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="username" autocomplete="off" value="<?php echo $data['username']; ?>" required>
+                  <input type="text" class="form-control" name="nombre" autocomplete="off" value="<?php echo $data['nombre']; ?>" required>
                 </div>
               </div>
 

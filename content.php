@@ -4,7 +4,7 @@ require_once "config/fungsi_tanggal.php";
 require_once "config/fungsi_rupiah.php";
 
 
-if (empty($_SESSION['username']) && empty($_SESSION['password'])){
+if (empty($_SESSION['nombre']) && empty($_SESSION['password'])){
 	echo "<meta http-equiv='refresh' content='0; url=index.php?alert=1'>";
 }
 else {

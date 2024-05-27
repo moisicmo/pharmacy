@@ -7,7 +7,7 @@ session_start();
 require_once "../../config/database.php";
 
 
-if (empty($_SESSION['username']) && empty($_SESSION['password'])){
+if (empty($_SESSION['nombre']) && empty($_SESSION['password'])){
 	echo "<meta http-equiv='refresh' content='0; url=index.php?alert=1'>";
 }
 
@@ -16,19 +16,22 @@ else {
 	if ($_GET['act']=='insert') {
 		if (isset($_POST['Guardar'])) {
 	
-			$username  = mysqli_real_escape_string($mysqli, trim($_POST['username']));
+			$nombre  = mysqli_real_escape_string($mysqli, trim($_POST['nombre']));
+			$apellido_paterno  = mysqli_real_escape_string($mysqli, trim($_POST['apellido_paterno']));
+			$apellido_materno  = mysqli_real_escape_string($mysqli, trim($_POST['apellido materno']));
+			$correo  = mysqli_real_escape_string($mysqli, trim($_POST['correo']));
+			$celular  = mysqli_real_escape_string($mysqli, trim($_POST['celular']));
+			$direccion  = mysqli_real_escape_string($mysqli, trim($_POST['direccion']));
 			$password  = md5(mysqli_real_escape_string($mysqli, trim($_POST['password'])));
-			$name_user = mysqli_real_escape_string($mysqli, trim($_POST['name_user']));
 			$permisos_acceso = mysqli_real_escape_string($mysqli, trim($_POST['permisos_acceso']));
 
-            $query = mysqli_query($mysqli, "INSERT INTO usuarios(username,password,name_user,permisos_acceso)
-                                            VALUES('$username','$password','$name_user','$permisos_acceso')")
-                                            or die('error: '.mysqli_error($mysqli));    
-
+			$query = mysqli_query($mysqli, "INSERT INTO usuarios(nombre,apellido_paterno,apellido_materno,correo,celular,direccion,password,rol_id,estado)
+																			VALUES('$nombre','$apellido_paterno','$apellido_materno','$correo','$celular','$direccion','$password','$permisos_acceso',1)")
+																			or die('error: '.mysqli_error($mysqli));
           
-            if ($query) {
-                header("location: ../../main.php?module=user&alert=1");
-            }
+			if ($query) {
+					header("location: ../../main.php?module=user&alert=1");
+			}
 		}	
 	}
 	
@@ -36,7 +39,7 @@ else {
 		if (isset($_POST['Guardar'])) {
 			if (isset($_POST['id_user'])) {
 				$id_user            = mysqli_real_escape_string($mysqli, trim($_POST['id_user']));
-				$username           = mysqli_real_escape_string($mysqli, trim($_POST['username']));
+				$nombre           = mysqli_real_escape_string($mysqli, trim($_POST['nombre']));
 				$password           = md5(mysqli_real_escape_string($mysqli, trim($_POST['password'])));
 				$name_user          = mysqli_real_escape_string($mysqli, trim($_POST['name_user']));
 				$email              = mysqli_real_escape_string($mysqli, trim($_POST['email']));
@@ -59,7 +62,7 @@ else {
 
 				if (empty($_POST['password']) && empty($_FILES['foto']['name'])) {
 					
-                    $query = mysqli_query($mysqli, "UPDATE usuarios SET username 	= '$username',
+                    $query = mysqli_query($mysqli, "UPDATE usuarios SET nombre 	= '$nombre',
                     													name_user 	= '$name_user',
                     													email       = '$email',
                     													telefono     = '$telefono',
@@ -76,7 +79,7 @@ else {
 		
 				elseif (!empty($_POST['password']) && empty($_FILES['foto']['name'])) {
 					
-                    $query = mysqli_query($mysqli, "UPDATE usuarios SET username 	= '$username',
+                    $query = mysqli_query($mysqli, "UPDATE usuarios SET nombre 	= '$nombre',
                     													name_user 	= '$name_user',
                     													password 	= '$password',
                     													email       = '$email',
@@ -100,7 +103,7 @@ else {
 	                        
 	                        if(move_uploaded_file($tmp_file, $path_file)) { 
                         		
-			                    $query = mysqli_query($mysqli, "UPDATE usuarios SET username 	= '$username',
+			                    $query = mysqli_query($mysqli, "UPDATE usuarios SET nombre 	= '$nombre',
 			                    													name_user 	= '$name_user',
 			                    													email       = '$email',
 			                    													telefono     = '$telefono',
@@ -135,7 +138,7 @@ else {
 	                       
 	                        if(move_uploaded_file($tmp_file, $path_file)) { 
                         		
-			                    $query = mysqli_query($mysqli, "UPDATE usuarios SET username 	= '$username',
+			                    $query = mysqli_query($mysqli, "UPDATE usuarios SET nombre 	= '$nombre',
 			                    													name_user 	= '$name_user',
 			                    													password    = '$password',
 			                    													email       = '$email',

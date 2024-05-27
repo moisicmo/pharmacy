@@ -24,9 +24,44 @@ if ($_GET['form']=='add') { ?>
             <div class="box-body">
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">Nombre de usuario</label>
+                <label class="col-sm-2 control-label">Nombre</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="username" autocomplete="off" required>
+                  <input type="text" class="form-control" name="nombre" autocomplete="off" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Apellido Paterno</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" name="apellido_paterno" autocomplete="off" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Apellido Materno</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" name="apellido_materno" autocomplete="off" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Correo</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" name="correo" autocomplete="off" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Celular</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" name="celular" autocomplete="off" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Dirección</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" name="direccion" autocomplete="off" required>
                 </div>
               </div>
 
@@ -37,26 +72,25 @@ if ($_GET['form']=='add') { ?>
                 </div>
               </div>
 
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Nombre</label>
-                <div class="col-sm-5">
-                  <input type="text" class="form-control" name="name_user" autocomplete="off" required>
-                </div>
-              </div>
-
+              <?php  
+              $query = mysqli_query($mysqli, "SELECT * FROM roles") or die('error: '.mysqli_error($mysqli));
+              ?>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Permisos de acceso</label>
                 <div class="col-sm-5">
                   <select class="form-control" name="permisos_acceso" required>
                     <option value=""></option>
-                    <option value="Super Admin">Super Admin</option>
-                    <option value="Gerente">Gerente</option>
-                    <option value="Almacen">Almacén</option>
+                    <?php
+                    // Iterar sobre los resultados de la consulta y generar las opciones
+                    while ($row = mysqli_fetch_assoc($query)) {
+                        echo '<option value="'.$row['id'].'">'.$row['nombre'].'</option>';
+                    }
+                    ?>
                   </select>
                 </div>
               </div>
-            </div><!-- /.box body -->
 
+            </div><!-- /.box body -->
             <div class="box-footer">
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
@@ -107,7 +141,7 @@ elseif ($_GET['form']=='edit') {
               <div class="form-group">
                 <label class="col-sm-2 control-label">Nombre de Usuario</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="username" autocomplete="off" value="<?php echo $data['username']; ?>" required>
+                  <input type="text" class="form-control" name="nombre" autocomplete="off" value="<?php echo $data['nombre']; ?>" required>
                 </div>
               </div>
 

@@ -5,7 +5,7 @@ session_start();
 
 require_once "../../config/database.php";
 
-if (empty($_SESSION['username']) && empty($_SESSION['password'])){
+if (empty($_SESSION['nombre']) && empty($_SESSION['password'])){
 	echo "<meta http-equiv='refresh' content='0; url=index.php?alert=1'>";
 }
 
@@ -16,7 +16,7 @@ else {
 			if (isset($_POST['id_user'])) {
 			
 				$id_user            = mysqli_real_escape_string($mysqli, trim($_POST['id_user']));
-				$username           = mysqli_real_escape_string($mysqli, trim($_POST['username']));
+				$nombre           = mysqli_real_escape_string($mysqli, trim($_POST['nombre']));
 				$name_user          = mysqli_real_escape_string($mysqli, trim($_POST['name_user']));
 				$email              = mysqli_real_escape_string($mysqli, trim($_POST['email']));
 				$telefono            = mysqli_real_escape_string($mysqli, trim($_POST['telefono']));
@@ -39,7 +39,7 @@ else {
 			
 				if (empty($_FILES['foto']['name'])) {
 			       
-                    $query = mysqli_query($mysqli, "UPDATE usuarios SET username 	= '$username',
+                    $query = mysqli_query($mysqli, "UPDATE usuarios SET nombre 	= '$nombre',
                     													name_user 	= '$name_user',
                     													email       = '$email',
                     													telefono     = '$telefono'
@@ -62,7 +62,7 @@ else {
 	                     
 	                        if(move_uploaded_file($tmp_file, $path_file)) { 
                         		
-			                    $query = mysqli_query($mysqli, "UPDATE usuarios SET username 	= '$username',
+			                    $query = mysqli_query($mysqli, "UPDATE usuarios SET nombre 	= '$nombre',
 			                    													name_user 	= '$name_user',
 			                    													email       = '$email',
 			                    													telefono     = '$telefono',

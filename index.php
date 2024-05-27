@@ -57,7 +57,7 @@
         <br/>
         <form action="login-check.php" method="POST">
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" name="username" placeholder="Username" autocomplete="off" required />
+            <input type="text" class="form-control" name="nombre" placeholder="nombre" autocomplete="off" required />
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
 
