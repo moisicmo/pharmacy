@@ -10,7 +10,6 @@ session_start();
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Inventario de Medicamentos">
-    <meta name="author" content="Inventario de Medicamentos - Sistemas Web" />
     
     <!-- favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.png" />
@@ -138,10 +137,7 @@ session_start();
         </div><!-- /.modal -->
 
       </div><!-- /.content-wrapper -->
-
-      <footer class="main-footer">
-        <strong>Copyright &copy; <?php echo date('Y');?> - <a href="http://obedalvarado.pw/" target="_blank">Sistemas Web</a>.</strong>
-      </footer>
+      
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.3 -->

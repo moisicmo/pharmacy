@@ -19,7 +19,7 @@ else {
             $pventa = str_replace('.', '', mysqli_real_escape_string($mysqli, trim($_POST['pventa'])));
             $unidad     = mysqli_real_escape_string($mysqli, trim($_POST['unidad']));
 
-            $created_user = $_SESSION['id_user'];
+            $created_user = $_SESSION['id'];
 
   
             $query = mysqli_query($mysqli, "INSERT INTO medicamentos(codigo,nombre,precio_compra,precio_venta,unidad,created_user,updated_user) 
@@ -44,7 +44,7 @@ else {
                 $pventa = str_replace('.', '', mysqli_real_escape_string($mysqli, trim($_POST['pventa'])));
                 $unidad     = mysqli_real_escape_string($mysqli, trim($_POST['unidad']));
 
-                $updated_user = $_SESSION['id_user'];
+                $updated_user = $_SESSION['id'];
 
                 $query = mysqli_query($mysqli, "UPDATE medicamentos SET  nombre       = '$nombre',
                                                                     precio_compra      = '$pcompra',

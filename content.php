@@ -3,6 +3,8 @@ require_once "config/database.php";
 require_once "config/fungsi_tanggal.php";
 require_once "config/fungsi_rupiah.php";
 
+$mensaje = "EL NOMBRE ES " . $_SESSION['nombre'];
+echo "<script>console.log('" . addslashes($mensaje) . "');</script>";
 
 if (empty($_SESSION['nombre']) && empty($_SESSION['password'])){
 	echo "<meta http-equiv='refresh' content='0; url=index.php?alert=1'>";

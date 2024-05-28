@@ -26,49 +26,49 @@ if ($_GET['form']=='add') { ?>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Nombre</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="nombre" autocomplete="off" required>
+                  <input type="text" class="form-control" name="nombre" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Apellido Paterno</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="apellido_paterno" autocomplete="off" required>
+                  <input type="text" class="form-control" name="apellido_paterno" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Apellido Materno</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="apellido_materno" autocomplete="off" required>
+                  <input type="text" class="form-control" name="apellido_materno" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Correo</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="correo" autocomplete="off" required>
+                  <input type="email" class="form-control" name="correo"  required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Celular</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="celular" autocomplete="off" required>
+                  <input type="text" class="form-control" name="celular" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Dirección</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="direccion" autocomplete="off" required>
+                  <input type="text" class="form-control" name="direccion"required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Contraseña</label>
                 <div class="col-sm-5">
-                  <input type="password" class="form-control" name="password" autocomplete="off" required>
+                  <input type="password" class="form-control" name="password"required>
                 </div>
               </div>
 
@@ -76,9 +76,9 @@ if ($_GET['form']=='add') { ?>
               $query = mysqli_query($mysqli, "SELECT * FROM roles") or die('error: '.mysqli_error($mysqli));
               ?>
               <div class="form-group">
-                <label class="col-sm-2 control-label">Permisos de acceso</label>
+                <label class="col-sm-2 control-label">Rol</label>
                 <div class="col-sm-5">
-                  <select class="form-control" name="permisos_acceso" required>
+                  <select class="form-control" name="rol_id" required>
                     <option value=""></option>
                     <?php
                     // Iterar sobre los resultados de la consulta y generar las opciones
@@ -110,7 +110,7 @@ if ($_GET['form']=='add') { ?>
 elseif ($_GET['form']=='edit') { 
   	if (isset($_GET['id'])) {
 
-      $query = mysqli_query($mysqli, "SELECT * FROM usuarios WHERE id_user='$_GET[id]'") 
+      $query = mysqli_query($mysqli, "SELECT u.*, r.nombre as rol_nombre FROM usuarios u INNER JOIN roles r ON r.id = u.rol_id WHERE u.id='$_GET[id]'") 
                                       or die('error: '.mysqli_error($mysqli));
       $data  = mysqli_fetch_assoc($query);
   	}	
@@ -136,65 +136,68 @@ elseif ($_GET['form']=='edit') {
           <form role="form" class="form-horizontal" method="POST" action="modules/user/proses.php?act=update" enctype="multipart/form-data">
             <div class="box-body">
 
-              <input type="hidden" name="id_user" value="<?php echo $data['id_user']; ?>">
+              <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">Nombre de Usuario</label>
+                <label class="col-sm-2 control-label">Nombre</label>
                 <div class="col-sm-5">
                   <input type="text" class="form-control" name="nombre" autocomplete="off" value="<?php echo $data['nombre']; ?>" required>
                 </div>
               </div>
 
-              
-
+            
               <div class="form-group">
-                <label class="col-sm-2 control-label">Nombre</label>
+                <label class="col-sm-2 control-label">Apellido paterno</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="name_user" autocomplete="off" value="<?php echo $data['name_user']; ?>" required>
+                  <input type="text" class="form-control" name="apellido_paterno" autocomplete="off" value="<?php echo $data['apellido_paterno']; ?>" required>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Apellido materno</label>
+                <div class="col-sm-5">
+                  <input type="text" class="form-control" name="apellido_materno" autocomplete="off" value="<?php echo $data['apellido_materno']; ?>" required>
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">Email</label>
+                <label class="col-sm-2 control-label">Correo</label>
                 <div class="col-sm-5">
-                  <input type="email" class="form-control" name="email" autocomplete="off" value="<?php echo $data['email']; ?>">
+                  <input type="email" class="form-control" name="correo" autocomplete="off" value="<?php echo $data['correo']; ?>">
                 </div>
               </div>
             
               <div class="form-group">
-                <label class="col-sm-2 control-label">Telefono</label>
+                <label class="col-sm-2 control-label">Celular</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="telefono" autocomplete="off" maxlength="13" onKeyPress="return goodchars(event,'0123456789',this)" value="<?php echo $data['telefono']; ?>">
+                  <input type="text" class="form-control" name="celular" autocomplete="off" maxlength="13" onKeyPress="return goodchars(event,'0123456789',this)" value="<?php echo $data['celular']; ?>">
                 </div>
               </div>
 
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Foto</label>
-                <div class="col-sm-5">
-                  <input type="file" name="foto">
-                  <br/>
-                <?php  
-                if ($data['foto']=="") { ?>
-                  <img style="border:1px solid #eaeaea;border-radius:5px;" src="images/user/user-default.png" width="128">
-                <?php
-                }
-                else { ?>
-                  <img style="border:1px solid #eaeaea;border-radius:5px;" src="images/user/<?php echo $data['foto']; ?>" width="128">
-                <?php
-                }
-                ?>
-                </div>
-              </div>
 
               <div class="form-group">
-                <label class="col-sm-2 control-label">Permisos de acceso</label>
+                <label class="col-sm-2 control-label">Dirección</label>
                 <div class="col-sm-5">
-                  <select class="form-control" name="permisos_acceso" required>
-                    <option value="<?php echo $data['permisos_acceso']; ?>"><?php echo $data['permisos_acceso']; ?></option>
-                    <option value="Super Admin">Super Admin</option>
-                    <option value="Gerente">Gerente</option>
-                    <option value="Almacen">Almacén</option>
-                  </select>
+                  <input type="text" class="form-control" name="direccion" autocomplete="off" value="<?php echo $data['direccion']; ?>">
+                </div>
+              </div>
+
+              <?php  
+              $query = mysqli_query($mysqli, "SELECT * FROM roles") or die('error: '.mysqli_error($mysqli));
+              ?>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Rol</label>
+                <div class="col-sm-5">
+                <select class="form-control" name="rol_id" required>
+                  <?php
+                  // Iterar sobre los resultados de la consulta y generar las opciones
+                  while ($row = mysqli_fetch_assoc($query)) {
+                      // Verificar si el ID del rol es igual al ID del rol del usuario
+                      $selected = ($row['id'] == $rolUsuarioID) ? 'selected' : '';
+                      echo '<option value="'.$row['id'].'" '.$selected.'>'.$row['nombre'].'</option>';
+                  }
+                  ?>
+                </select>
                 </div>
               </div>
             </div><!-- /.box body -->

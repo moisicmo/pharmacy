@@ -23,7 +23,7 @@ else {
             $num   = mysqli_real_escape_string($mysqli, trim($_POST['num']));
             $total_stock      = mysqli_real_escape_string($mysqli, trim($_POST['total_stock']));
             $tipo_transaccion= mysqli_real_escape_string($mysqli, trim($_POST['transaccion']));
-            $created_user    = $_SESSION['id_user'];
+            $created_user    = $_SESSION['id'];
 
           
             $query = mysqli_query($mysqli, "INSERT INTO transaccion_medicamentos(codigo_transaccion,fecha,codigo,numero,created_user,tipo_transaccion) 

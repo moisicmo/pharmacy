@@ -106,41 +106,41 @@
                                             or die('error: '.mysqli_error($mysqli));
 
 
-            while ($data = mysqli_fetch_assoc($query)) { 
-  
-              echo "<tr>
-                      <td width='50' class='center'>$no</td>";
+              while ($data = mysqli_fetch_assoc($query)) { 
 
-              echo "  <td>$data[nombre]</td>
-                      <td>$data[apellido_paterno]</td>
-                      <td>$data[apellido_materno]</td>
-                      <td>$data[permisos_acceso]</td>
-                      <td class='center'>$data[estado]</td>
-
-                      <td class='center' width='100'>
-                          <div>";
-
-                          if ($data['status']=='activo') { ?>
-                            <a data-toggle="tooltip" data-placement="top" title="Bloqueado" style="margin-right:5px" class="btn btn-warning btn-sm" href="modules/user/proses.php?act=off&id=<?php echo $data['id_user'];?>">
-                                <i style="color:#fff" class="glyphicon glyphicon-off"></i>
-                            </a>
-            <?php
-                          } 
-                          else { ?>
-                            <a data-toggle="tooltip" data-placement="top" title="activo" style="margin-right:5px" class="btn btn-success btn-sm" href="modules/user/proses.php?act=on&id=<?php echo $data['id_user'];?>">
-                                <i style="color:#fff" class="glyphicon glyphicon-ok"></i>
-                            </a>
-            <?php
-                          }
-
-              echo "      <a data-toggle='tooltip' data-placement='top' title='Modificar' class='btn btn-primary btn-sm' href='?module=form_user&form=edit&id=$data[id_user]'>
+                echo "<tr>
+                        <td width='50' class='center'>$no</td>";
+            
+                echo "  <td>{$data['nombre']}</td>
+                        <td>{$data['apellido_paterno']}</td>
+                        <td>{$data['apellido_materno']}</td>
+                        <td>{$data['permisos_acceso']}</td>
+                        <td class='center'>".($data['estado'] == 1 ? 'Habilitado' : 'Deshabilitado')."</td>
+                        <td class='center' width='100'>
+                            <div>";
+            
+                    if ($data['estado']==0) { ?>
+                        <a data-toggle="tooltip" data-placement="top" title="Bloqueado" style="margin-right:5px" class="btn btn-warning btn-sm" href="modules/user/proses.php?act=off&id=<?php echo $data['id'];?>">
+                            <i style="color:#fff" class="glyphicon glyphicon-off"></i>
+                        </a>
+                    <?php
+                    } 
+                    else { ?>
+                        <a data-toggle="tooltip" data-placement="top" title="activo" style="margin-right:5px" class="btn btn-success btn-sm" href="modules/user/proses.php?act=on&id=<?php echo $data['id'];?>">
+                            <i style="color:#fff" class="glyphicon glyphicon-ok"></i>
+                        </a>
+                    <?php
+                    }
+            
+                echo "      <a data-toggle='tooltip' data-placement='top' title='Modificar' class='btn btn-primary btn-sm' href='?module=form_user&form=edit&id={$data['id']}'>
                                 <i style='color:#fff' class='glyphicon glyphicon-edit'></i>
                             </a>
-                          </div>
-                      </td>
-                    </tr>";
-              $no++;
+                            </div>
+                        </td>
+                      </tr>";
+                $no++;
             }
+                                          
             ?>
             </tbody>
           </table>

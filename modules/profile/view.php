@@ -1,8 +1,8 @@
 
 <?php  
-if (isset($_SESSION['id_user'])) {
+if (isset($_SESSION['id'])) {
 
-  $query = mysqli_query($mysqli, "SELECT * FROM usuarios WHERE id_user='$_SESSION[id_user]'") 
+  $query = mysqli_query($mysqli, "SELECT * FROM usuarios WHERE id='$_SESSION[id]'") 
                                   or die('error: '.mysqli_error($mysqli));
   $data  = mysqli_fetch_assoc($query);
 } 

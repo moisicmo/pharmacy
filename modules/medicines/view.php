@@ -1,6 +1,6 @@
 <section class="content-header">
   <h1>
-    <i class="fa fa-folder-o icon-title"></i> Datos de Medicamentos
+    <i class="fa fa-folder-o icon-title"></i> Medicamentos
 
     <a class="btn btn-primary btn-social pull-right" href="?module=form_medicines&form=add" title="agregar" data-toggle="tooltip">
       <i class="fa fa-plus"></i> Agregar
@@ -55,31 +55,35 @@
                 <th class="center">No.</th>
                 <th class="center">Codigo</th>
                 <th class="center">Nombre</th>
-                <th class="center">Precio de compra</th>
-                <th class="center">Precio de venta</th>
-                <th class="center">Stock</th>
-                <th class="center">Unidad</th>
+                <th class="center">Categoria</th>
+                <!-- <th class="center">Precio de venta</th> -->
+                <th class="center">Precio</th>
+                <!-- <th class="center">Unidad</th> -->
                 <th></th>
               </tr>
             </thead>
             <tbody>
             <?php  
             $no = 1;
-            $query = mysqli_query($mysqli, "SELECT codigo,nombre,precio_compra,precio_venta,unidad,stock FROM medicamentos ORDER BY codigo DESC")
+            $query = mysqli_query($mysqli, "SELECT p.*, c.nombre as cat_nombre
+                                            FROM productos p 
+                                            INNER JOIN categorias c ON c.id=p.categoria_id
+                                            ORDER BY p.id DESC")
                                             or die('error: '.mysqli_error($mysqli));
 
             while ($data = mysqli_fetch_assoc($query)) { 
-              $precio_compra = format_rupiah($data['precio_compra']);
-              $precio_venta = format_rupiah($data['precio_venta']);
+              // $precio_compra = format_rupiah($data['precio_compra']);
+              // $precio_venta = format_rupiah($data['precio_venta']);
+              // <td width='100' align='right'>$ $precio_compra</td>
+              // <td width='100' align='right'>$ $precio_venta</td>
+              // <td width='80' class='center'>$data[unidad]</td>
            
               echo "<tr>
                       <td width='30' class='center'>$no</td>
-                      <td width='80' class='center'>$data[codigo]</td>
+                      <td width='80' class='center'>$data[cod_productos]</td>
                       <td width='180'>$data[nombre]</td>
-                      <td width='100' align='right'>$ $precio_compra</td>
-                      <td width='100' align='right'>$ $precio_venta</td>
-                      <td width='80' align='right'>$data[stock]</td>
-                      <td width='80' class='center'>$data[unidad]</td>
+                      <td width='180'>$data[cat_nombre]</td>
+                      <td width='80' align='right'>$data[precio] Bs</td>
                       <td class='center' width='80'>
                         <div>
                           <a data-toggle='tooltip' data-placement='top' title='modificar' style='margin-right:5px' class='btn btn-primary btn-sm' href='?module=form_medicines&form=edit&id=$data[codigo]'>

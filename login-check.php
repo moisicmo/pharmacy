@@ -13,8 +13,13 @@ if (!ctype_alnum($nombre) OR !ctype_alnum($password)) {
 
     if ($rows > 0) {
         $data  = mysqli_fetch_assoc($query);
-
         session_start();
+        // // Convertir el array a JSON
+        // $data_json = json_encode($data);
+        
+        // // Insertar el JSON en un script de JavaScript
+        // echo "<script>console.log('PHP Data: ', JSON.parse('" . addslashes($data_json) . "'));</script>";
+
         $_SESSION['id']                 = $data['id'];
         $_SESSION['nombre']             = $data['nombre'];
         $_SESSION['password']           = $data['password'];

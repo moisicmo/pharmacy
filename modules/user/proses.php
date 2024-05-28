@@ -1,11 +1,8 @@
-
-
 <?php
 session_start();
 
 
 require_once "../../config/database.php";
-
 
 if (empty($_SESSION['nombre']) && empty($_SESSION['password'])){
 	echo "<meta http-equiv='refresh' content='0; url=index.php?alert=1'>";
@@ -18,15 +15,15 @@ else {
 	
 			$nombre  = mysqli_real_escape_string($mysqli, trim($_POST['nombre']));
 			$apellido_paterno  = mysqli_real_escape_string($mysqli, trim($_POST['apellido_paterno']));
-			$apellido_materno  = mysqli_real_escape_string($mysqli, trim($_POST['apellido materno']));
+			$apellido_materno  = mysqli_real_escape_string($mysqli, trim($_POST['apellido_materno']));
 			$correo  = mysqli_real_escape_string($mysqli, trim($_POST['correo']));
-			$celular  = mysqli_real_escape_string($mysqli, trim($_POST['celular']));
+			$celular  = intval(trim($_POST['celular']));
 			$direccion  = mysqli_real_escape_string($mysqli, trim($_POST['direccion']));
 			$password  = md5(mysqli_real_escape_string($mysqli, trim($_POST['password'])));
-			$permisos_acceso = mysqli_real_escape_string($mysqli, trim($_POST['permisos_acceso']));
+			$rol_id  = intval(trim($_POST['rol_id']));
 
 			$query = mysqli_query($mysqli, "INSERT INTO usuarios(nombre,apellido_paterno,apellido_materno,correo,celular,direccion,password,rol_id,estado)
-																			VALUES('$nombre','$apellido_paterno','$apellido_materno','$correo','$celular','$direccion','$password','$permisos_acceso',1)")
+																			VALUES('$nombre','$apellido_paterno','$apellido_materno','$correo','$celular','$direccion','$password','$rol_id',1)")
 																			or die('error: '.mysqli_error($mysqli));
           
 			if ($query) {
@@ -37,135 +34,32 @@ else {
 	
 	elseif ($_GET['act']=='update') {
 		if (isset($_POST['Guardar'])) {
-			if (isset($_POST['id_user'])) {
-				$id_user            = mysqli_real_escape_string($mysqli, trim($_POST['id_user']));
+			if (isset($_POST['id'])) {
+				$id            = mysqli_real_escape_string($mysqli, trim($_POST['id']));
 				$nombre           = mysqli_real_escape_string($mysqli, trim($_POST['nombre']));
-				$password           = md5(mysqli_real_escape_string($mysqli, trim($_POST['password'])));
-				$name_user          = mysqli_real_escape_string($mysqli, trim($_POST['name_user']));
-				$email              = mysqli_real_escape_string($mysqli, trim($_POST['email']));
-				$telefono            = mysqli_real_escape_string($mysqli, trim($_POST['telefono']));
-				$permisos_acceso          = mysqli_real_escape_string($mysqli, trim($_POST['permisos_acceso']));
-				
-				$name_file          = $_FILES['foto']['name'];
-				$ukuran_file        = $_FILES['foto']['size'];
-				$tipe_file          = $_FILES['foto']['type'];
-				$tmp_file           = $_FILES['foto']['tmp_name'];
-				
-		
-				$allowed_extensions = array('jpg','jpeg','png');
-				
-			
-				$path_file          = "../../images/user/".$name_file;
-		
-				$file               = explode(".", $name_file);
-				$extension          = array_pop($file);
-
-				if (empty($_POST['password']) && empty($_FILES['foto']['name'])) {
+				$apellido_paterno  = mysqli_real_escape_string($mysqli, trim($_POST['apellido_paterno']));
+				$apellido_materno  = mysqli_real_escape_string($mysqli, trim($_POST['apellido_materno']));
+				$correo  = mysqli_real_escape_string($mysqli, trim($_POST['correo']));
+				$celular  = intval(trim($_POST['celular']));
+				$direccion  = mysqli_real_escape_string($mysqli, trim($_POST['direccion']));
+				$rol_id  = intval(trim($_POST['rol_id']));
 					
-                    $query = mysqli_query($mysqli, "UPDATE usuarios SET nombre 	= '$nombre',
-                    													name_user 	= '$name_user',
-                    													email       = '$email',
-                    													telefono     = '$telefono',
-                    													permisos_acceso   = '$permisos_acceso'
-                                                                  WHERE id_user 	= '$id_user'")
-                                                    or die('error: '.mysqli_error($mysqli));
-
+				$query = mysqli_query($mysqli, "UPDATE usuarios SET 
+																					nombre 	= '$nombre',
+																					apellido_paterno = '$apellido_paterno',
+																					apellido_materno = '$apellido_materno',
+																					correo 	= '$correo',
+																					celular       = '$celular',
+																					direccion     = '$direccion',
+																					rol_id   = '$rol_id'
+																				WHERE id 	= '$id'")
+																				or die('error: '.mysqli_error($mysqli));
                 
-                    if ($query) {
-                  
-                        header("location: ../../main.php?module=user&alert=2");
-                    }
-				}
-		
-				elseif (!empty($_POST['password']) && empty($_FILES['foto']['name'])) {
-					
-                    $query = mysqli_query($mysqli, "UPDATE usuarios SET nombre 	= '$nombre',
-                    													name_user 	= '$name_user',
-                    													password 	= '$password',
-                    													email       = '$email',
-                    													telefono     = '$telefono',
-                    													permisos_acceso   = '$permisos_acceso'
-                                                                  WHERE id_user 	= '$id_user'")
-                                                    or die('error : '.mysqli_error($mysqli));
-
-             
-                    if ($query) {
-                    
-                        header("location: ../../main.php?module=user&alert=2");
-                    }
-				}
-				
-				elseif (empty($_POST['password']) && !empty($_FILES['foto']['name'])) {
+				if ($query) {
 			
-					if (in_array($extension, $allowed_extensions)) {
-	                
-	                    if($ukuran_file <= 1000000) { 
-	                        
-	                        if(move_uploaded_file($tmp_file, $path_file)) { 
-                        		
-			                    $query = mysqli_query($mysqli, "UPDATE usuarios SET nombre 	= '$nombre',
-			                    													name_user 	= '$name_user',
-			                    													email       = '$email',
-			                    													telefono     = '$telefono',
-			                    													foto 		= '$name_file',
-			                    													permisos_acceso   = '$permisos_acceso'
-			                                                                  WHERE id_user 	= '$id_user'")
-			                                                    or die('error : '.mysqli_error($mysqli));
-
-			                    if ($query) {
-			                    
-			                        header("location: ../../main.php?module=user&alert=2");
-			                    }
-                        	} else {
-	                           
-	                            header("location: ../../main.php?module=user&alert=5");
-	                        }
-	                    } else {
-	                       
-	                        header("location: ../../main.php?module=user&alert=6");
-	                    }
-	                } else {
-	                   
-	                    header("location: ../../main.php?module=user&alert=7");
-	                } 
+						header("location: ../../main.php?module=user&alert=2");
 				}
-				
-				else {
-					
-					if (in_array($extension, $allowed_extensions)) {
-	                   
-	                    if($ukuran_file <= 1000000) { 
-	                       
-	                        if(move_uploaded_file($tmp_file, $path_file)) { 
-                        		
-			                    $query = mysqli_query($mysqli, "UPDATE usuarios SET nombre 	= '$nombre',
-			                    													name_user 	= '$name_user',
-			                    													password    = '$password',
-			                    													email       = '$email',
-			                    													telefono     = '$telefono',
-			                    													foto 		= '$name_file',
-			                    													permisos_acceso   = '$permisos_acceso'
-			                                                                  WHERE id_user 	= '$id_user'")
-			                                                    or die('error: '.mysqli_error($mysqli));
 
-			                    
-			                    if ($query) {
-			                       
-			                        header("location: ../../main.php?module=user&alert=2");
-			                    }
-                        	} else {
-	                            
-	                            header("location: ../../main.php?module=user&alert=5");
-	                        }
-	                    } else {
-	                       
-	                        header("location: ../../main.php?module=user&alert=6");
-	                    }
-	                } else {
-	                
-	                    header("location: ../../main.php?module=user&alert=7");
-	                } 
-				}
 			}
 		}
 	}
@@ -174,12 +68,12 @@ else {
 	elseif ($_GET['act']=='on') {
 		if (isset($_GET['id'])) {
 			
-			$id_user = $_GET['id'];
-			$status  = "activo";
+			$id = $_GET['id'];
+			$status  = 0;
 
 		
-            $query = mysqli_query($mysqli, "UPDATE usuarios SET status  = '$status'
-                                                          WHERE id_user = '$id_user'")
+            $query = mysqli_query($mysqli, "UPDATE usuarios SET estado  = '$status'
+                                                          WHERE id = '$id'")
                                             or die('error: '.mysqli_error($mysqli));
 
   
@@ -194,12 +88,12 @@ else {
 	elseif ($_GET['act']=='off') {
 		if (isset($_GET['id'])) {
 			
-			$id_user = $_GET['id'];
-			$status  = "bloqueado";
+			$id = $_GET['id'];
+			$status  = 1;
 
 		
-            $query = mysqli_query($mysqli, "UPDATE usuarios SET status  = '$status'
-                                                          WHERE id_user = '$id_user'")
+            $query = mysqli_query($mysqli, "UPDATE usuarios SET estado  = '$status'
+                                                          WHERE id = '$id'")
                                             or die('Error : '.mysqli_error($mysqli));
 
         

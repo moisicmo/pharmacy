@@ -11,14 +11,14 @@ if (empty($_SESSION['nombre']) && empty($_SESSION['password'])){
 
 else {
     if (isset($_POST['Guardar'])) {
-        if (isset($_SESSION['id_user'])) {
+        if (isset($_SESSION['id'])) {
     
             $old_pass    = md5(mysqli_real_escape_string($mysqli, trim($_POST['old_pass'])));
             $new_pass    = md5(mysqli_real_escape_string($mysqli, trim($_POST['new_pass'])));
             $retype_pass = md5(mysqli_real_escape_string($mysqli, trim($_POST['retype_pass'])));
 
  
-            $id_user = $_SESSION['id_user'];
+            $id_user = $_SESSION['id'];
 
 
             $sql = mysqli_query($mysqli, "SELECT password FROM usuarios WHERE id_user=$id_user")
