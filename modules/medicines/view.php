@@ -56,6 +56,7 @@
                 <th class="center">Codigo</th>
                 <th class="center">Nombre</th>
                 <th class="center">Categoria</th>
+                <th class="center">Sub Categoria</th>
                 <!-- <th class="center">Precio de venta</th> -->
                 <th class="center">Precio</th>
                 <!-- <th class="center">Unidad</th> -->
@@ -65,9 +66,10 @@
             <tbody>
             <?php  
             $no = 1;
-            $query = mysqli_query($mysqli, "SELECT p.*, c.nombre as cat_nombre
+            $query = mysqli_query($mysqli, "SELECT p.*, c.nombre as cat_nombre, s.nombre as sub_cat_nombre
                                             FROM productos p 
                                             INNER JOIN categorias c ON c.id=p.categoria_id
+                                            INNER JOIN sub_categorias s ON s.id = p.sub_categoria_id
                                             ORDER BY p.id DESC")
                                             or die('error: '.mysqli_error($mysqli));
 
@@ -79,18 +81,19 @@
               // <td width='80' class='center'>$data[unidad]</td>
            
               echo "<tr>
-                      <td width='30' class='center'>$no</td>
+                      <td width='30' class='center'>$data[id]</td>
                       <td width='80' class='center'>$data[cod_productos]</td>
                       <td width='180'>$data[nombre]</td>
                       <td width='180'>$data[cat_nombre]</td>
+                      <td width='180'>$data[sub_cat_nombre]</td>
                       <td width='80' align='right'>$data[precio] Bs</td>
                       <td class='center' width='80'>
                         <div>
-                          <a data-toggle='tooltip' data-placement='top' title='modificar' style='margin-right:5px' class='btn btn-primary btn-sm' href='?module=form_medicines&form=edit&id=$data[codigo]'>
+                          <a data-toggle='tooltip' data-placement='top' title='modificar' style='margin-right:5px' class='btn btn-primary btn-sm' href='?module=form_medicines&form=edit&id=$data[cod_productos]'>
                               <i style='color:#fff' class='glyphicon glyphicon-edit'></i>
                           </a>";
             ?>
-                          <a data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn btn-danger btn-sm" href="modules/medicines/proses.php?act=delete&id=<?php echo $data['codigo'];?>" onclick="return confirm('estas seguro de eliminar<?php echo $data['nombre']; ?> ?');">
+                          <a data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn btn-danger btn-sm" href="modules/medicines/proses.php?act=delete&id=<?php echo $data['cod_productos'];?>" onclick="return confirm('estas seguro de eliminar<?php echo $data['nombre']; ?> ?');">
                               <i style="color:#fff" class="glyphicon glyphicon-trash"></i>
                           </a>
             <?php

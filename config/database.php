@@ -1,9 +1,9 @@
 <?php
 
-$server   = "mariadb"; // El nombre del servicio mariadb definido en docker-compose.yml
+$server   = "localhost"; // El nombre del servicio mariadb definido en docker-compose.yml
 $username = "root";
-$password = "root";
-$database = "pharmacy";
+$password = "";
+$database = "oswa_inv";
 
 $mysqli = new mysqli($server, $username, $password, $database);
 
