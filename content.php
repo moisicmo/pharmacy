@@ -6,75 +6,64 @@ require_once "config/fungsi_rupiah.php";
 $mensaje = "EL NOMBRE ES " . $_SESSION['nombre'];
 echo "<script>console.log('" . addslashes($mensaje) . "');</script>";
 
-if (empty($_SESSION['nombre']) && empty($_SESSION['password'])){
+if (empty($_SESSION['nombre']) && empty($_SESSION['password'])) {
 	echo "<meta http-equiv='refresh' content='0; url=index.php?alert=1'>";
-}
-else {
+} else {
 	if ($_GET['module'] == 'start') {
 		include "modules/start/view.php";
-	}
-
-	elseif ($_GET['module'] == 'medicines') {
+	} elseif ($_GET['module'] == 'medicines') {
 		include "modules/medicines/view.php";
-	}
-
-	elseif ($_GET['module'] == 'form_medicines') {
+	} elseif ($_GET['module'] == 'form_medicines') {
 		include "modules/medicines/form.php";
-	}
-	
-
-	elseif ($_GET['module'] == 'medicines_transaction') {
+	} elseif ($_GET['module'] == 'medicines_transaction') {
 		include "modules/medicines_transaction/view.php";
-	}
-
-	elseif ($_GET['module'] == 'form_medicines_transaction') {
+	} elseif ($_GET['module'] == 'form_medicines_transaction') {
 		include "modules/medicines_transaction/form.php";
-	}
-	
-
-	elseif ($_GET['module'] == 'stock_inventory') {
+	} elseif ($_GET['module'] == 'stock_inventory') {
 		include "modules/stock_inventory/view.php";
-	}
-
-	elseif ($_GET['module'] == 'stock_report') {
+	} elseif ($_GET['module'] == 'stock_report') {
 		include "modules/stock_report/view.php";
 	}
 
 	//modulo usuarios
 	elseif ($_GET['module'] == 'user') {
 		include "modules/user/view.php";
-	}
-	elseif ($_GET['module'] == 'form_user') {
+	} elseif ($_GET['module'] == 'form_user') {
 		include "modules/user/form.php";
 	}
 
 	//modulo sucursales
 	elseif ($_GET['module'] == 'sucursales') {
 		include "modules/sucursales/view.php";
-	}
-	elseif ($_GET['module'] == 'form_sucursal') {
+	} elseif ($_GET['module'] == 'form_sucursal') {
 		include "modules/sucursales/form.php";
 	}
-	//perfil
 	//clientes
 	elseif ($_GET['module'] == 'clientes') {
 		include "modules/clientes/view.php";
-	}
-	elseif ($_GET['module'] == 'form_clientes') {
+	} elseif ($_GET['module'] == 'form_clientes') {
 		include "modules/clientes/form.php";
 	}
-
-
-	elseif ($_GET['module'] == 'profile') {
-		include "modules/profile/view.php";
-		}
-
-
-	elseif ($_GET['module'] == 'form_profile') {
-		include "modules/profile/form.php";
+	//roles
+	elseif ($_GET['module'] == 'roles') {
+		include "modules/roles/view.php";
+	} elseif ($_GET['module'] == 'form_roles') {
+		include "modules/roles/form.php";
+	}
+	//categorias
+	elseif ($_GET['module'] == 'categorias') {
+		include "modules/categorias/view.php";
+	} elseif ($_GET['module'] == 'form_categorias') {
+		include "modules/categorias/form.php";
 	}
 
-	elseif ($_GET['module'] == 'password') {
+
+	//perfil
+	elseif ($_GET['module'] == 'profile') {
+		include "modules/profile/view.php";
+	} elseif ($_GET['module'] == 'form_profile') {
+		include "modules/profile/form.php";
+	} elseif ($_GET['module'] == 'password') {
 		include "modules/password/view.php";
 	}
 }
