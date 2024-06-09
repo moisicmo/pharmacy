@@ -3,7 +3,7 @@
 $server   = "localhost"; // El nombre del servicio mariadb definido en docker-compose.yml
 $username = "root";
 $password = "";
-$database = "pharmacy_nataly";
+$database = "pharmacy";
 
 $mysqli = new mysqli($server, $username, $password, $database);
 

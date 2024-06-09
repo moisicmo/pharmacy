@@ -30,17 +30,17 @@ if ($_SESSION['permisos_acceso'] == 'Super Admin') { ?>
       <?php
     }
 
-
+    //movimientos 
     if ($_GET["module"] == "medicines_transaction" || $_GET["module"] == "form_medicines_transaction") { ?>
       <li class="active">
-        <a href="?module=medicines_transaction"><i class="fa fa-clone"></i> Registro de medicamentos </a>
+        <a href="?module=medicines_transaction"><i class="fa fa-clone"></i> Movimientos </a>
       </li>
-      <?php
+    <?php
     } else { ?>
       <li>
-        <a href="?module=medicines_transaction"><i class="fa fa-clone"></i> Registro de medicamentos </a>
+        <a href="?module=medicines_transaction"><i class="fa fa-clone"></i> Movimientos </a>
       </li>
-      <?php
+    <?php
     }
 
     if ($_GET["module"] == "stock_inventory") { ?>
