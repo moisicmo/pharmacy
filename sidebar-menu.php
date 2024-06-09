@@ -129,6 +129,19 @@ if ($_SESSION['permisos_acceso'] == 'Super Admin') { ?>
       </li>
       <?php
     }
+    //sub_categorias
+    if ($_GET["module"] == "sub_categorias" || $_GET["module"] == "form_sub_categorias") { ?>
+      <li class="active">
+        <a href="?module=sub_categorias"><i class="fa fa-heartbeat"></i> sub_categorias</a>
+      </li>
+      <?php
+    } else { ?>
+      <li>
+        <a href="?module=sub_categorias"><i class="fa fa-heartbeat"></i> sub_categorias</a>
+      </li>
+      <?php
+    }
+
     //roles
     if ($_GET["module"] == "roles" || $_GET["module"] == "form_roles") { ?>
       <li class="active">

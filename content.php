@@ -38,6 +38,17 @@ if (empty($_SESSION['nombre']) && empty($_SESSION['password'])) {
 	} elseif ($_GET['module'] == 'form_sucursal') {
 		include "modules/sucursales/form.php";
 	}
+
+	//modulo sub categorias
+
+	elseif ($_GET['module'] == 'sub_categorias') {
+		include "modules/sub_categorias/view.php";
+	}
+	elseif ($_GET['module'] == 'form_sub_categorias') {
+		include "modules/sub_categorias/form.php";
+	}
+
+	//perfil
 	//clientes
 	elseif ($_GET['module'] == 'clientes') {
 		include "modules/clientes/view.php";
