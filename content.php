@@ -40,15 +40,22 @@ else {
 		include "modules/stock_report/view.php";
 	}
 
+	//modulo usuarios
 	elseif ($_GET['module'] == 'user') {
 		include "modules/user/view.php";
 	}
-
-
 	elseif ($_GET['module'] == 'form_user') {
 		include "modules/user/form.php";
 	}
 
+	//modulo sucursales
+	elseif ($_GET['module'] == 'sucursales') {
+		include "modules/sucursales/view.php";
+	}
+	elseif ($_GET['module'] == 'form_sucursal') {
+		include "modules/sucursales/form.php";
+	}
+	//perfil
 	elseif ($_GET['module'] == 'profile') {
 		include "modules/profile/view.php";
 		}

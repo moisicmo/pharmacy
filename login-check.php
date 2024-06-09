@@ -1,4 +1,4 @@
-<?php
+      <?php
 require_once "config/database.php";
 
 $nombre = mysqli_real_escape_string($mysqli, stripslashes(strip_tags(htmlspecialchars(trim($_POST['nombre'])))));

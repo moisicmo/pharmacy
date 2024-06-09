@@ -12,20 +12,15 @@ if (empty($_SESSION['nombre']) && empty($_SESSION['password'])) {
 		if (isset($_POST['Guardar'])) {
 
 			$nombre = mysqli_real_escape_string($mysqli, trim($_POST['nombre']));
-			$apellido_paterno = mysqli_real_escape_string($mysqli, trim($_POST['apellido_paterno']));
-			$apellido_materno = mysqli_real_escape_string($mysqli, trim($_POST['apellido_materno']));
-			$correo = mysqli_real_escape_string($mysqli, trim($_POST['correo']));
-			$celular = intval(trim($_POST['celular']));
 			$direccion = mysqli_real_escape_string($mysqli, trim($_POST['direccion']));
-			$password = md5(mysqli_real_escape_string($mysqli, trim($_POST['password'])));
-			$rol_id = intval(trim($_POST['rol_id']));
+			$telefono = intval(trim($_POST['telefono']));
 
-			$query = mysqli_query($mysqli, "INSERT INTO usuarios(nombre,apellido_paterno,apellido_materno,correo,celular,direccion,password,rol_id,estado)
-																			VALUES('$nombre','$apellido_paterno','$apellido_materno','$correo','$celular','$direccion','$password','$rol_id',1)")
+			$query = mysqli_query($mysqli, "INSERT INTO sucursales(nombre,direccion,telefono)
+																			VALUES('$nombre','$direccion','$telefono')")
 				or die('error: ' . mysqli_error($mysqli));
 
 			if ($query) {
-				header("location: ../../main.php?module=user&alert=1");
+				header("location: ../../main.php?module=sucursales&alert=1");
 			}
 		}
 	} elseif ($_GET['act'] == 'update') {
@@ -33,27 +28,19 @@ if (empty($_SESSION['nombre']) && empty($_SESSION['password'])) {
 			if (isset($_POST['id'])) {
 				$id = mysqli_real_escape_string($mysqli, trim($_POST['id']));
 				$nombre = mysqli_real_escape_string($mysqli, trim($_POST['nombre']));
-				$apellido_paterno = mysqli_real_escape_string($mysqli, trim($_POST['apellido_paterno']));
-				$apellido_materno = mysqli_real_escape_string($mysqli, trim($_POST['apellido_materno']));
-				$correo = mysqli_real_escape_string($mysqli, trim($_POST['correo']));
-				$celular = intval(trim($_POST['celular']));
 				$direccion = mysqli_real_escape_string($mysqli, trim($_POST['direccion']));
-				$rol_id = intval(trim($_POST['rol_id']));
+				$telefono = intval(trim($_POST['telefono']));
 
-				$query = mysqli_query($mysqli, "UPDATE usuarios SET 
-														nombre 	= '$nombre',
-														apellido_paterno = '$apellido_paterno',
-														apellido_materno = '$apellido_materno',
-														correo 	= '$correo',
-														celular       = '$celular',
-														direccion     = '$direccion',
-														rol_id   = '$rol_id'
-													WHERE id 	= '$id'")
+				$query = mysqli_query($mysqli, "UPDATE sucursales SET 
+														nombre = '$nombre',
+														direccion = '$direccion',
+														telefono = '$telefono'
+														WHERE id = '$id'")
 					or die('error: ' . mysqli_error($mysqli));
 
 				if ($query) {
 
-					header("location: ../../main.php?module=user&alert=2");
+					header("location: ../../main.php?module=sucursales&alert=2");
 				}
 
 			}

@@ -102,6 +102,24 @@ if ($_SESSION['permisos_acceso']=='Super Admin') { ?>
 	}
 
 
+//sucursales
+  if ($_GET["module"]=="user" || $_GET["module"]=="form_user") { ?>
+		<li class="active">
+			<a href="?module=sucursales"><i class="fa fa-user"></i> sucursales</a>
+	  	</li>
+	<?php
+	}
+
+	else { ?>
+		<li>
+			<a href="?module=sucursales"><i class="fa fa-user"></i> sucursales</a>
+	  	</li>
+	<?php
+	}
+
+
+
+
 	if ($_GET["module"]=="password") { ?>
 		<li class="active">
 			<a href="?module=password"><i class="fa fa-lock"></i> Cambiar contraseña</a>
