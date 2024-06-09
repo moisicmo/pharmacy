@@ -2,9 +2,9 @@
 
 <section class="content-header">
   <h1>
-    <i class="fa fa-user icon-title"></i> Usuarios
+    <i class="fa fa-user icon-title"></i> Clientes
 
-    <a class="btn btn-primary btn-social pull-right" href="?module=form_user&form=add" title="Agregar" data-toggle="tooltip">
+    <a class="btn btn-primary btn-social pull-right" href="?module=form_clientes&form=add" title="Agregar" data-toggle="tooltip">
       <i class="fa fa-plus"></i> Agregar
     </a>
   </h1>
@@ -87,12 +87,15 @@
             <thead>
               <tr>
                 <th class="center">No.</th>
+                <th class="center">ci nit</th>
                 <th class="center">Nombre</th>
                 <th class="center">Apellido Paterno</th>
                 <th class="center">Apellido Materno</th>
-                <th class="center">Nombre</th>
-                <th class="center">Permisos de acceso</th>
-                <th class="center">Status</th>
+                <th class="center">Direccion</th>
+                <th class="center">Celular</th>
+                <th class="center">Correo</th>
+                <th class="center">Fecha de nacimiento</th>
+                <th class="center">Razon social</th>
                 <th class="center"></th>
               </tr>
             </thead>
@@ -100,45 +103,32 @@
 
                         <tbody>
             <?php  
-            $no = 1;
       
-            $query = mysqli_query($mysqli, "SELECT u.*, r.nombre as 'permisos_acceso' FROM usuarios u INNER JOIN roles r ON r.id = u.rol_id ORDER BY u.id DESC")
+            $query = mysqli_query($mysqli, "SELECT * FROM clientes")
                                             or die('error: '.mysqli_error($mysqli));
 
 
               while ($data = mysqli_fetch_assoc($query)) { 
-
-                echo "<tr>
-                        <td width='50' class='center'>$no</td>";
-            
-                echo "  <td>{$data['nombre']}</td>
+                echo "
+                        <td>{$data['id']}</td>
+                        <td>{$data['ci_nit']}</td>
+                        <td>{$data['nombre']}</td>
                         <td>{$data['apellido_paterno']}</td>
                         <td>{$data['apellido_materno']}</td>
-                        <td>{$data['permisos_acceso']}</td>
-                        <td class='center'>".($data['estado'] == 1 ? 'Habilitado' : 'Deshabilitado')."</td>
+                        <td>{$data['direccion']}</td>
+                        <td>{$data['celular']}</td>
+                        <td>{$data['correo']}</td>
+                        <td>{$data['fecha_nacimiento']}</td>
+                        <td>{$data['razon_social']}</td>
                         <td class='center' width='100'>
                             <div>";
             
-                    if ($data['estado']==0) { ?>
-                        <a data-toggle="tooltip" data-placement="top" title="Bloqueado" style="margin-right:5px" class="btn btn-warning btn-sm" href="modules/user/proses.php?act=off&id=<?php echo $data['id'];?>">
-                            <i style="color:#fff" class="glyphicon glyphicon-off"></i>
-                        </a>
-                    <?php
-                    } 
-                    else { ?>
-                        <a data-toggle="tooltip" data-placement="top" title="activo" style="margin-right:5px" class="btn btn-success btn-sm" href="modules/user/proses.php?act=on&id=<?php echo $data['id'];?>">
-                            <i style="color:#fff" class="glyphicon glyphicon-ok"></i>
-                        </a>
-                    <?php
-                    }
-            
-                echo "      <a data-toggle='tooltip' data-placement='top' title='Modificar' class='btn btn-primary btn-sm' href='?module=form_user&form=edit&id={$data['id']}'>
+                echo "      <a data-toggle='tooltip' data-placement='top' title='Modificar' class='btn btn-primary btn-sm' href='?module=form_clientes&form=edit&id={$data['id']}'>
                                 <i style='color:#fff' class='glyphicon glyphicon-edit'></i>
                             </a>
                             </div>
                         </td>
                       </tr>";
-                $no++;
             }
                                           
             ?>

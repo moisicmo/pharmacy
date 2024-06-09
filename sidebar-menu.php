@@ -93,10 +93,25 @@ if ($_SESSION['permisos_acceso']=='Super Admin') { ?>
 	  	</li>
 	<?php
 	}
+  
 
 	else { ?>
 		<li>
 			<a href="?module=user"><i class="fa fa-user"></i> Administrar usuarios</a>
+	  	</li>
+	<?php
+	}
+  if ($_GET["module"]=="clientes" || $_GET["module"]=="form_clientes") { ?>
+		<li class="active">
+			<a href="?module=clientes"><i class="fa fa-clientes"></i> clientes</a>
+	  	</li>
+	<?php
+	}
+  
+
+	else { ?>
+		<li>
+			<a href="?module=clientes"><i class="fa fa-clientes"></i> clientes</a>
 	  	</li>
 	<?php
 	}

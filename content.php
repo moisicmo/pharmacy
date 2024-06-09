@@ -56,6 +56,15 @@ else {
 		include "modules/sucursales/form.php";
 	}
 	//perfil
+	//clientes
+	elseif ($_GET['module'] == 'clientes') {
+		include "modules/clientes/view.php";
+	}
+	elseif ($_GET['module'] == 'form_clientes') {
+		include "modules/clientes/form.php";
+	}
+
+
 	elseif ($_GET['module'] == 'profile') {
 		include "modules/profile/view.php";
 		}
